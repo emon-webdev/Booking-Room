@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { setAuthToken } from "../../api/auth";
 import PrimaryButton from "../../Components/Button/PrimaryButton";
 import SmallSpinner from "../../Components/Spinner/SmallSpinner";
 import { AuthContext } from "../../contexts/AuthProvider";
@@ -30,6 +31,8 @@ const Login = () => {
         const user = result.user;
         console.log(user);
         toast.success("Login Successful");
+        //get token
+        setAuthToken(result.user)
         navigate(from, { replace: true });
       })
       .catch((error) => {
@@ -44,6 +47,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        setAuthToken(result.user)
         navigate(from, { replace: true });
       })
       .catch((error) => console.error(error));

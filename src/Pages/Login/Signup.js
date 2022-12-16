@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { toast } from "react-hot-toast";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { setAuthToken } from "../../api/auth";
 import PrimaryButton from "../../Components/Button/PrimaryButton";
 import SmallSpinner from "../../Components/Spinner/SmallSpinner";
 import { AuthContext } from "../../contexts/AuthProvider";
@@ -37,11 +38,12 @@ const Signup = () => {
       .then((res) => res.json())
       .then((imageData) => {
         const img = imageData?.data.display_url;
-        console.log(img);
         //create user
         createUser(email, password)
           .then((result) => {
             console.log(result.user);
+            //get token 
+            setAuthToken(result.user)
             //update User Profile and Img
             updateUserProfile(name, img)
               .then(
@@ -72,6 +74,7 @@ const Signup = () => {
       .then((result) => {
         const user = result.user;
         toast.success(`Google Sign In ${user}`);
+        setAuthToken(result.user)
         navigate(from, { replace: true });
       })
       .catch((error) => {
