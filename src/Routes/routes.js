@@ -2,11 +2,13 @@ import { createBrowserRouter } from "react-router-dom";
 import AllBookings from "../Components/Dashboard/AllBookings";
 import AllUsers from "../Components/Dashboard/AllUsers";
 import BecomeAHost from "../Components/Dashboard/BecomeAHost";
+import ManageHomes from "../Components/Dashboard/ManageHomes";
 import MyBookings from "../Components/Dashboard/MyBookings";
 import Welcome from "../Components/Dashboard/Welcome";
 import DashboardLayout from "../Layout/DashboardLayout";
 import Main from "../Layout/Main";
 import AddHome from "../Pages/AddHome";
+import AllHome from "../Pages/AllHome";
 import Checkout from "../Pages/Checkout";
 import Details from "../Pages/Details";
 import ErrorPage from "../Pages/ErrorPage";
@@ -36,11 +38,17 @@ const router = createBrowserRouter([
         element: <Signup />,
       },
       {
+        path: "/all-homes",
+        element: <AllHome />,
+      },
+      {
         path: "/coming-soon",
         element: <ComingSoon />,
       },
       {
-        path: "/service-details",
+        path: "/service-details/:id",
+        loader: ({ params }) =>
+          fetch(`${process.env.REACT_APP_API_URL}/homes/${params.id}`),
         element: <Details />,
       },
       {
@@ -108,6 +116,10 @@ const router = createBrowserRouter([
             <AllBookings />
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/dashboard/manage-homes",
+        element: <ManageHomes />,
       },
     ],
   },

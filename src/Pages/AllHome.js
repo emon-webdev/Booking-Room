@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { getAllHome } from '../api/services'
 import HomeCard from '../Components/Card/HomeCard'
 import Spinner from '../Components/Spinner/Spinner'
 
@@ -16,6 +17,8 @@ const AllHome = () => {
       .catch(err => console.log(err))
   }, [])
 
+  console.log(homes)
+
   return (
     <>
       {loading ? (
@@ -30,7 +33,7 @@ const AllHome = () => {
             </div>
           </div>
         </section>
-      )}
+       )}
     </>
   )
 }

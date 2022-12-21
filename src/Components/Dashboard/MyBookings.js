@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { getAllBookingsByEmail } from "../../api/bookings";
 import { AuthContext } from "../../contexts/AuthProvider";
-import Spinner from "../Spinner/Spinner";
 
 const MyBookings = () => {
   const { user } = useContext(AuthContext);
@@ -26,9 +25,9 @@ const MyBookings = () => {
     <>
       <h2>My bookings</h2>
 
-      {loading ? (
+      {/* {loading ? (
         <Spinner />
-      ) : (
+      ) : ( */}
         <div className="container mx-auto px-4 sm:px-8">
           <div className="py-8">
             <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
@@ -128,7 +127,7 @@ const MyBookings = () => {
             </div>
           </div>
         </div>
-      )}
+      {/* )} */}
     </>
   );
 };
